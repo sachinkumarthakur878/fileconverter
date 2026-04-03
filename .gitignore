@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+
+# Build files
+dist/
+build/
+
+# Uploads folder (IMPORTANT)
+src/uploads/
+
+# Temporary files
+tmp/
+temp/
+
+# Coverage
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+
+# Package lock (optional)
+package-lock.json
