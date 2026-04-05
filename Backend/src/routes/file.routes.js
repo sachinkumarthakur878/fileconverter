@@ -6,18 +6,22 @@ import {
   uploadFile,
   convertToPDF,
   convertToWord,
+  compressFileHandler,
   getUserFiles,
   deleteFile,
 } from "../controllers/file.controller.js";
 
 const router = express.Router();
 
-// Upload file (auth required)
+// Upload file
 router.post("/upload", authMiddleware, upload.single("file"), uploadFile);
 
-// Convert routes (auth required)
+// Convert routes
 router.post("/to-pdf", authMiddleware, upload.single("file"), convertToPDF);
 router.post("/to-word", authMiddleware, upload.single("file"), convertToWord);
+
+// Compress route — quality sent as form field alongside the file
+router.post("/compress", authMiddleware, upload.single("file"), compressFileHandler);
 
 // Get all files for logged-in user
 router.get("/my-files", authMiddleware, getUserFiles);

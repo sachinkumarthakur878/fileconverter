@@ -1,5 +1,5 @@
 {
-  "name": "file-converter-backend",
+  "name": "compressio-backend",
   "version": "1.0.0",
   "main": "src/server.js",
   "type": "module",
@@ -21,6 +21,8 @@
     "pdf-lib": "^1.17.1",
     "mammoth": "^1.8.0",
     "docx": "^9.5.0",
-    "fs-extra": "^11.3.0"
+    "fs-extra": "^11.3.0",
+    "pdf-parse": "^1.1.1",
+    "sharp": "^0.33.4"
   }
 }

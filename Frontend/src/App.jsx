@@ -5,12 +5,12 @@ import { ThemeProvider } from './context/ThemeContext'
 import ProtectedRoute from './components/common/ProtectedRoute'
 import AppLayout from './components/layout/AppLayout'
 
-// Pages
 import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import DashboardPage from './pages/DashboardPage'
 import ConvertPage from './pages/ConvertPage'
+import CompressPage from './pages/CompressPage'
 import MyFilesPage from './pages/MyFilesPage'
 import UploadPage from './pages/UploadPage'
 import NotFoundPage from './pages/NotFoundPage'
@@ -21,12 +21,10 @@ export default function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            {/* Public */}
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
 
-            {/* Protected — inside dashboard shell */}
             <Route
               element={
                 <ProtectedRoute>
@@ -36,17 +34,16 @@ export default function App() {
             >
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/convert" element={<ConvertPage />} />
+              <Route path="/compress" element={<CompressPage />} />
               <Route path="/my-files" element={<MyFilesPage />} />
               <Route path="/upload" element={<UploadPage />} />
             </Route>
 
-            {/* Fallbacks */}
             <Route path="/404" element={<NotFoundPage />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
         </BrowserRouter>
 
-        {/* Global toast notifications */}
         <Toaster
           position="bottom-right"
           gutter={8}
@@ -63,18 +60,8 @@ export default function App() {
               boxShadow: 'var(--shadow-lg)',
               padding: '12px 16px',
             },
-            success: {
-              iconTheme: {
-                primary: 'var(--success)',
-                secondary: 'transparent',
-              },
-            },
-            error: {
-              iconTheme: {
-                primary: 'var(--error)',
-                secondary: 'transparent',
-              },
-            },
+            success: { iconTheme: { primary: 'var(--success)', secondary: 'transparent' } },
+            error: { iconTheme: { primary: 'var(--error)', secondary: 'transparent' } },
           }}
         />
       </AuthProvider>

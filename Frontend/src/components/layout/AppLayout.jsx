@@ -6,6 +6,7 @@ import TopHeader from './TopHeader'
 const PAGE_TITLES = {
   '/dashboard': 'Dashboard',
   '/convert': 'Convert Files',
+  '/compress': 'Compress Files',
   '/my-files': 'My Files',
   '/upload': 'Upload',
 }
@@ -13,19 +14,13 @@ const PAGE_TITLES = {
 export default function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const location = useLocation()
-  const title = PAGE_TITLES[location.pathname] || 'FileForge'
+  const title = PAGE_TITLES[location.pathname] || 'CompressIO'
 
   return (
     <div className="app-layout">
-      <Sidebar
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-      />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="main-content">
-        <TopHeader
-          title={title}
-          onMenuClick={() => setSidebarOpen(o => !o)}
-        />
+        <TopHeader title={title} onMenuClick={() => setSidebarOpen(o => !o)} />
         <Outlet />
       </div>
     </div>

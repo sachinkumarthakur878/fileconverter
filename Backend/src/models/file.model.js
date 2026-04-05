@@ -7,8 +7,9 @@ const fileSchema = new mongoose.Schema(
     originalName: { type: String, required: true },
     path: { type: String, required: true },
     convertedPath: { type: String, default: null },
-    fileType: { type: String }, // e.g. "pdf", "docx"
-    size: { type: Number },     // in bytes
+    fileType: { type: String },
+    size: { type: Number },
+    compressedSize: { type: Number, default: null },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

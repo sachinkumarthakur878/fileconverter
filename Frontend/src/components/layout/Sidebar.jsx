@@ -5,8 +5,8 @@ import {
   Files,
   Upload,
   LogOut,
-  FileText,
-  Zap,
+  Minimize2,
+  FileArchive,
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { getInitials } from '../../utils/helpers'
@@ -15,6 +15,7 @@ import toast from 'react-hot-toast'
 const NAV_ITEMS = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/convert', icon: ArrowRightLeft, label: 'Convert Files' },
+  { to: '/compress', icon: Minimize2, label: 'Compress Files' },
   { to: '/my-files', icon: Files, label: 'My Files' },
   { to: '/upload', icon: Upload, label: 'Upload' },
 ]
@@ -31,7 +32,6 @@ export default function Sidebar({ isOpen, onClose }) {
 
   return (
     <>
-      {/* Mobile overlay */}
       <div
         className={`sidebar-overlay ${isOpen ? 'visible' : ''}`}
         onClick={onClose}
@@ -41,10 +41,10 @@ export default function Sidebar({ isOpen, onClose }) {
         {/* Logo */}
         <NavLink to="/dashboard" className="sidebar__logo" onClick={onClose}>
           <div className="logo-icon">
-            <FileText />
+            <FileArchive />
           </div>
           <span className="logo-text">
-            File<span>Forge</span>
+            Compress<span>IO</span>
           </span>
         </NavLink>
 
@@ -79,10 +79,7 @@ export default function Sidebar({ isOpen, onClose }) {
               </div>
             </div>
           )}
-          <button
-            className="sidebar__nav-item"
-            onClick={handleLogout}
-          >
+          <button className="sidebar__nav-item" onClick={handleLogout}>
             <LogOut />
             Sign Out
           </button>

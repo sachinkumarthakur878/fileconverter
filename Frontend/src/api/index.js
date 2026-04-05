@@ -4,22 +4,20 @@ const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
 const api = axios.create({
   baseURL: BASE_URL,
-  timeout: 60000, // 60s for file uploads
+  timeout: 120000, // 2 min for large files
 })
 
-// Request interceptor — attach JWT
+// Attach JWT
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
+    if (token) config.headers.Authorization = `Bearer ${token}`
     return config
   },
   (error) => Promise.reject(error)
 )
 
-// Response interceptor — handle 401
+// Handle 401
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -40,7 +38,6 @@ export const authAPI = {
 
 // ---- FILES ----
 export const fileAPI = {
-  // Upload a file (stores in DB, no conversion)
   upload: (file, onProgress) => {
     const formData = new FormData()
     formData.append('file', file)
@@ -52,7 +49,6 @@ export const fileAPI = {
     })
   },
 
-  // Convert to PDF (returns blob)
   convertToPDF: (file, onProgress) => {
     const formData = new FormData()
     formData.append('file', file)
@@ -65,7 +61,6 @@ export const fileAPI = {
     })
   },
 
-  // Convert to Word (returns blob)
   convertToWord: (file, onProgress) => {
     const formData = new FormData()
     formData.append('file', file)
@@ -78,10 +73,21 @@ export const fileAPI = {
     })
   },
 
-  // Get all files for logged-in user
-  getMyFiles: () => api.get('/api/file/my-files'),
+  // quality: number 0.1–1.0
+  compressFile: (file, quality, onProgress) => {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('quality', quality.toString())
+    return api.post('/api/file/compress', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      responseType: 'blob',
+      onUploadProgress: (e) => {
+        if (onProgress) onProgress(Math.round((e.loaded * 100) / e.total))
+      },
+    })
+  },
 
-  // Delete a file
+  getMyFiles: () => api.get('/api/file/my-files'),
   deleteFile: (id) => api.delete(`/api/file/${id}`),
 }
 
