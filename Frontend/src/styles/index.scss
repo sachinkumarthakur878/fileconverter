@@ -1,0 +1,21 @@
+// ============================================================
+// MAIN SCSS ENTRY — 4-Layer Architecture
+//
+// Layer 1: Tokens + Reset   (base)
+// Layer 2: Component styles (reusable UI blocks)
+// Layer 3: Layout styles    (structural containers)
+// Layer 4: Page styles      (page/feature specific)
+// ============================================================
+
+// LAYER 1 — BASE
+@use './base/tokens';
+@use './base/reset';
+
+// LAYER 2 — COMPONENTS
+@use './components/components';
+
+// LAYER 3 — LAYOUT
+@use './components/layout';
+
+// LAYER 4 — PAGES
+@use './pages/pages';
